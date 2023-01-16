@@ -40,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetButtonDown("Fire1")) { _attack = true; _animator.SetBool("attack", true); }
+        if(Input.GetButtonDown("Fire1") && _attack==false) { _attack = true; _animator.SetBool("attack", true); }
         _direction.x = Input.GetAxisRaw("Horizontal") * _moveSpeed;
         _animator.SetFloat("movespeedx",Mathf.Abs(_direction.x));
         _animator.SetFloat("movespeedy", _direction.y);
@@ -76,7 +76,9 @@ public class PlayerMovement : MonoBehaviour
         _direction.y = _playerRigid.velocity.y;
 
         _playerRigid.velocity = _direction;
-        if (_attack) { _attack= false; _animator.SetBool("attack", false); }
+
+        if (_attack) { _attack= false; _animator.Play("attack"); _animator.SetBool("attack", false); }
+
         if (_jump && _jumpAmount<_maxJump)
         {
             _jump = false;

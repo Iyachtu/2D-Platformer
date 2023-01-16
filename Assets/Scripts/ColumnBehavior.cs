@@ -48,7 +48,7 @@ public class ColumnBehavior : MonoBehaviour
         }
         else if (_hp ==0)
         {
-            gameObject.SetActive(false);
+            Destroy(gameObject);
         }
     }
 }
